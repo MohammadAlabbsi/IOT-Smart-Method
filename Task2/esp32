@@ -5,53 +5,53 @@ Starting out, using development boards is usually the best choice because it req
 Additionally, these development boards' USB-Serial converters are simple to use, which makes communicating with the ESP32 considerably simpler.
 Additional development boards are available.
 
-//Pinos ligado no botão
+//Pins connected to the button
 int btn1 = 18;
  
-//Pinos que são ligados no módulo de relés
+//Pins that are wired on the relay module
 int rele1 = 33;
 int rele2 = 32;
  
-//variável para guardar o estado do segundo relé
+//variable to store the state of the second relay
 boolean rele2_Ativo = false;
 
 
-//A função setup() é executada uma vez antes do loop
+//The setup() function is executed once before the loop
 void setup()
 {
-  //Seta os pinos dos botões como entrada
+  //Set button pins as input
   pinMode(btn1, INPUT);
  
-  //Seta os pinos dos relés como saída
+  //Set relay pins as output
   pinMode(rele1, OUTPUT);
   pinMode(rele2, OUTPUT);
  
-  //Abre a porta serial, definindo a taxa de dados para 9600 bps
+  //Opens the serial port, setting the data rate to 9600 bps
   Serial.begin(9600);
 }
 
 
-//A função loop() é executada após o setup e é repetida continuamente
+//The loop() function is executed after setup and is repeated continuously
 void loop()
 {
-  if (digitalRead(btn1) == HIGH) //Caso o botão 1 foi pressionado
+  if (digitalRead(btn1) == HIGH) //If button 1 was pressed
   {
-    //Exibe no monitor serial a mensagem entre aspas
-    Serial.println("Botão pressionado");
+    //Display the message in quotes on the serial monitor
+    Serial.println("button pressed");
  
-    //Ligamos o relé 1
+    //We turn on relay 1
     digitalWrite(rele1, HIGH);
  
-    //Invertemos o estado da variável rele2_Ativo
+    //We invert the state of the variable relay2_Ativo
     rele2_Ativo = !rele2_Ativo;
  
-    //Mudamos o estado do relé 2
+    //We change the state of relay 2
     digitalWrite(rele2, rele2_Ativo );
  
-    //Aguardamos 1 segundo (1000 ms)
+    //We wait 1 second (1000 ms)
     delay(1000);
  
-    //Desligamos o relé 1
+    //We turn off relay 1
     digitalWrite(rele1, LOW);
   }
 }
